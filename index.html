@@ -1,31 +1,983 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Aldo Alfaro</title>
-        <link rel="stylesheet" href="estilos/styles.css">
-    </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldo Alfaro · Asesorías de Matemáticas</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E42;
+    --gold: #E8A830;
+    --gold-light: #F5C96A;
+    --cream: #F5F0E8;
+    --white: #FFFFFF;
+    --gray: #6B7280;
+    --light-gray: #F0EDE7;
+  }
 
-    <body>
-        <header class="header"> 
-            <ul class="list-container">
-                <li class="list">
-                    <a class="link" href="">Inicio</a>
-                </li>
-                <li class="list">
-                    <a class="link" href="">Github</a>
-                </li>
-                <li class="list">
-                    <a class="link" href="">Contacto</a>
-                </li>
-        </header>        
-        <main class="main"> 
-            <section class="hero-container">
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
 
-            </section>
-        </main>
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(13, 27, 42, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(232, 168, 48, 0.15);
+  }
 
-    </body>
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .logo span {
+    color: var(--white);
+    font-style: italic;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    padding: 0.55rem 1.3rem;
+    border-radius: 4px;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold-light) !important;
+    transform: translateY(-1px);
+    color: var(--navy) !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 5% 4rem;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -150px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,168,48,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,168,48,0.12);
+    border: 1px solid rgba(232,168,48,0.3);
+    color: var(--gold);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-badge::before {
+    content: '✦';
+    font-size: 0.6rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,168,48,0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-weight: 400;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.2);
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.4);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .math-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(232,168,48,0.2);
+    border-radius: 16px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .math-card .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .card-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .card-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #FF5F57; }
+  .dot-yellow { background: #FEBC2E; }
+  .dot-green { background: #28C840; }
+
+  .formula-display {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s, transform 0.4s;
+  }
+
+  .formula-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .formula-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .formula-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .floating-tag {
+    position: absolute;
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 100px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .tag-1 { top: -18px; left: 20px; animation: float 3.5s ease-in-out infinite 0.5s; }
+  .tag-2 { bottom: -18px; right: 20px; animation: float 4s ease-in-out infinite 1s; }
+
+  /* STATS */
+  .stats-bar {
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 5%;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 0.5rem;
+    position: relative;
+  }
+
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%; bottom: 20%;
+    width: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+  }
+
+  /* SERVICIOS */
+  .section {
+    padding: 6rem 5%;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .section-subtitle {
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 520px;
+    font-weight: 300;
+    margin-bottom: 3.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover {
+    border-color: rgba(232,168,48,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: rgba(232,168,48,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(232,168,48,0.2);
+  }
+
+  .service-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+    color: var(--white);
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .service-level {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    background: rgba(232,168,48,0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    border: 1px solid rgba(232,168,48,0.2);
+  }
+
+  /* COMO FUNCIONA */
+  .how-section {
+    padding: 6rem 5%;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3.5rem;
+    position: relative;
+  }
+
+  .step-card {
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .step-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: rgba(232,168,48,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-num-text {
+    font-size: 3.5rem;
+    color: rgba(232,168,48,0.15);
+    font-family: 'DM Serif Display', serif;
+  }
+
+  .step-badge {
+    font-size: 0.85rem;
+    color: var(--gold);
+    background: rgba(232,168,48,0.1);
+    border: 1px solid rgba(232,168,48,0.25);
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .step-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+    color: var(--white);
+  }
+
+  .step-desc {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* TESTIMONIOS */
+  .testimonials {
+    padding: 6rem 5%;
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .testi-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.1rem;
+  }
+
+  .testi-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .testi-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(232,168,48,0.15);
+    border: 1px solid rgba(232,168,48,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .testi-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .testi-grade {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+  }
+
+  /* CTA FINAL */
+  .cta-section {
+    padding: 6rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(232,168,48,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .cta-section p {
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+  }
+
+  .footer-logo span {
+    color: var(--white);
+    font-style: italic;
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* WHATSAPP FLOAT BTN */
+  .whatsapp-btn {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 56px; height: 56px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 200;
+    text-decoration: none;
+  }
+
+  .whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+
+  .hero-visual { animation: fadeUp 0.8s ease 0.35s both; }
+
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 1fr; padding-top: 6rem; }
+    .hero-visual { display: none; }
+    nav ul { display: none; }
+    .stats-bar { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav>
+  <div class="logo">Aldo <span>Alfaro</span></div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como">Método</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto" class="nav-cta">Agendar clase</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-badge">Asesorías de Matemáticas</div>
+    <h1>Aprende <em>Matemáticas</em><br>de forma clara<br>y efectiva</h1>
+    <p>Clases personalizadas con un enfoque práctico y didáctico. Desde secundaria hasta nivel universitario — a tu ritmo, con resultados reales.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Agenda tu primera clase</button>
+      <button class="btn-secondary" onclick="document.getElementById('servicios').scrollIntoView({behavior:'smooth'})">Ver servicios</button>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="floating-tag tag-1">✦ Clases Online y Presencial</div>
+    <div class="math-card">
+      <div class="card-header">
+        <span class="card-title">Sesión en curso</span>
+        <div class="card-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+      </div>
+      <div class="formula-display" id="formula-display">ax² + bx + c = 0</div>
+      <div class="formula-list">
+        <div class="formula-item">Álgebra y cálculo diferencial</div>
+        <div class="formula-item">Geometría analítica</div>
+        <div class="formula-item">Estadística y probabilidad</div>
+        <div class="formula-item">Matemáticas financieras</div>
+      </div>
+    </div>
+    <div class="floating-tag tag-2">📈 +95% aprueban su examen</div>
+  </div>
+</section>
+
+<!-- ESTADÍSTICAS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">150+</div>
+    <div class="stat-label">Alumnos atendidos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Años de experiencia</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">95%</div>
+    <div class="stat-label">Tasa de aprobación</div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="section" id="servicios">
+  <div class="section-label">Lo que ofrezco</div>
+  <h2 class="section-title">Servicios de <em>asesoría</em><br>a tu medida</h2>
+  <p class="section-subtitle">Cada alumno aprende diferente. Por eso cada clase se adapta a tus necesidades, nivel y objetivos específicos.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">∑</div>
+      <div class="service-name">Secundaria y Preparatoria</div>
+      <div class="service-desc">Refuerzo en álgebra, geometría, trigonometría y precálculo. Preparación para exámenes ordinarios y extraordinarios.</div>
+      <span class="service-level">Básico · Intermedio</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">∫</div>
+      <div class="service-name">Nivel Universitario</div>
+      <div class="service-desc">Cálculo diferencial e integral, álgebra lineal, ecuaciones diferenciales y matemáticas aplicadas a ingeniería.</div>
+      <span class="service-level">Avanzado</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <div class="service-name">Estadística y Probabilidad</div>
+      <div class="service-desc">Análisis de datos, distribuciones, pruebas de hipótesis y apoyo con software estadístico como Excel y R.</div>
+      <span class="service-level">Intermedio · Avanzado</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <div class="service-name">Preparación para Exámenes</div>
+      <div class="service-desc">Sesiones intensivas orientadas a COMIPEMS, EXANI, PAA o exámenes de admisión universitaria. Simulacros incluidos.</div>
+      <span class="service-level">Todos los niveles</span>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="how-section" id="como">
+  <div class="section-label">El método</div>
+  <h2 class="section-title">Así funciona cada<br><em>asesoría</em></h2>
+  <p class="section-subtitle">Un proceso claro y efectivo diseñado para que realmente entiendas, no solo memorices.</p>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">
+        <span class="step-num-text">01</span>
+        <span class="step-badge">1</span>
+      </div>
+      <div class="step-title">Diagnóstico inicial</div>
+      <div class="step-desc">Evaluamos tu nivel actual para identificar áreas de oportunidad y diseñar un plan personalizado.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">
+        <span class="step-num-text">02</span>
+        <span class="step-badge">2</span>
+      </div>
+      <div class="step-title">Plan de trabajo</div>
+      <div class="step-desc">Establecemos objetivos claros y un cronograma de temas adaptado a tu ritmo y metas.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">
+        <span class="step-num-text">03</span>
+        <span class="step-badge">3</span>
+      </div>
+      <div class="step-title">Clases dinámicas</div>
+      <div class="step-desc">Explicaciones claras, ejemplos reales y ejercicios prácticos en cada sesión. Sin memorizar, entendiendo.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">
+        <span class="step-num-text">04</span>
+        <span class="step-badge">4</span>
+      </div>
+      <div class="step-title">Seguimiento continuo</div>
+      <div class="step-desc">Repaso de avances, retroalimentación constante y material de apoyo para practicar entre sesiones.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonials" id="testimonios">
+  <div class="section-label">Testimonios</div>
+  <h2 class="section-title">Lo que dicen mis<br><em>alumnos</em></h2>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Gracias a Aldo pude aprobar Cálculo I en la universidad. Explica súper bien y tiene mucha paciencia. Definitivamente lo recomiendo."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">MR</div>
+        <div>
+          <div class="testi-name">Mariana R.</div>
+          <div class="testi-grade">Ingeniería Civil · UABC</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Le tenía mucho miedo a las matemáticas desde la prepa. Con Aldo aprendí a enfrentarlas con confianza y subí mis calificaciones bastante."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">CL</div>
+        <div>
+          <div class="testi-name">Carlos L.</div>
+          <div class="testi-grade">Preparatoria · 3er año</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Me preparé para el EXANI con Aldo en solo 4 semanas y quedé en la carrera que quería. El método es muy efectivo y las clases son muy dinámicas."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SV</div>
+        <div>
+          <div class="testi-name">Sofía V.</div>
+          <div class="testi-grade">Admisión universitaria</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO / CTA -->
+<section class="cta-section" id="contacto">
+  <h2>¿Listo para <em>dominar</em><br>las matemáticas?</h2>
+  <p>Primera sesión de diagnóstico sin costo. Agenda hoy y empieza a ver resultados desde la primera clase.</p>
+  <div class="cta-actions">
+    <!-- Reemplaza el href con tu número: https://wa.me/521XXXXXXXXXX -->
+    <a href="https://wa.me/521XXXXXXXXXX" target="_blank" class="btn-primary" style="text-decoration:none;">💬 Escribir por WhatsApp</a>
+    <button class="btn-secondary">Ver horarios disponibles</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Aldo <span>Alfaro</span></div>
+  <div class="footer-copy">© 2025 Aldo Alfaro · Asesorías de Matemáticas</div>
+  <div class="footer-links">
+    <!-- Reemplaza # con tus enlaces reales -->
+    <a href="#">Instagram</a>
+    <a href="#">WhatsApp</a>
+    <a href="#">Correo</a>
+  </div>
+</footer>
+
+<!-- Botón flotante WhatsApp -->
+<!-- Reemplaza el href con tu número: https://wa.me/521XXXXXXXXXX -->
+<a class="whatsapp-btn" href="https://wa.me/521XXXXXXXXXX" target="_blank" title="Contactar por WhatsApp">💬</a>
+
+<script>
+  // Ciclo de fórmulas en la tarjeta del hero
+  const formulas = [
+    'ax² + bx + c = 0',
+    '∫ f(x) dx = F(x) + C',
+    'lim(x→0) sin(x)/x = 1',
+    'e^(iπ) + 1 = 0',
+    'd/dx [xⁿ] = nxⁿ⁻¹',
+    'P(A|B) = P(A∩B)/P(B)',
+  ];
+
+  let fi = 0;
+  const fd = document.getElementById('formula-display');
+
+  setInterval(() => {
+    fd.style.opacity = '0';
+    fd.style.transform = 'translateY(6px)';
+    setTimeout(() => {
+      fi = (fi + 1) % formulas.length;
+      fd.textContent = formulas[fi];
+      fd.style.opacity = '1';
+      fd.style.transform = 'translateY(0)';
+    }, 400);
+  }, 2800);
+
+  // Scroll suave para los enlaces del nav
+  document.querySelectorAll('a[href^="#"]').forEach(el => {
+    el.addEventListener('click', e => {
+      const target = document.querySelector(el.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
 </html>
